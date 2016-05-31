@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 function echo_create_vm {
     echo "[create_vm] $1"
 }
@@ -57,6 +59,6 @@ $STATUS"
 $MACHINE_NAME.ngcm.soton.ac.uk:8080 for your shiny new Jenkins server."
 
 else
-    echo_create_vm "The machine exists, so I'm not rebuilding it.
+    echo_create_vm "The machine exists, so I'm not rebuilding it."
 fi
 
