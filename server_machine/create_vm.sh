@@ -9,7 +9,7 @@ function get_machine_status {
 }
 
 # Get the status of the machine.
-STATUS=$(vagrant status --machine-readable | grep ",state," | cut -d, -f4)
+get_machine_status
 MACHINE_NAME=jenkinsfile-demo
 
 # Only run if the machine doesn't exist.
