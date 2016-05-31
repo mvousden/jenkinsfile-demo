@@ -28,7 +28,7 @@ if [ "$STATUS" == "not_created" ]; then
     # disable the NIC, and start the machine up again using VirtualBox.
     vagrant halt
 
-    echo "Waiting for virtual machine to shut down..."    
+    echo "Waiting for virtual machine to shut down..."
     get_machine_status
     while [ "$STATUS" != "poweroff" ]; do
         echo_create_vm "Current machine status is: $STATUS"
@@ -46,13 +46,15 @@ if [ "$STATUS" == "not_created" ]; then
     # Now wait for machine to boot.
     get_machine_status
     while [ "$STATUS" != "running" ]; do
-        echo_create_vm "Waiting for machine to boot. Current status is: $STATUS"
+        echo_create_vm "Waiting for machine to boot. Current status is:
+$STATUS"
         sleep 15
         get_machine_status
     done
 
     # Finish!
-    echo_create_vm "Your machine has booted and provisioned successfully. Check $MACHINE_NAME.ngcm.soton.ac.uk:8080 for your shiny new Jenkins server."
+    echo_create_vm "Your machine has booted and provisioned successfully. Check
+$MACHINE_NAME.ngcm.soton.ac.uk:8080 for your shiny new Jenkins server."
 
 else
     echo_create_vm "The machine exists, so I'm not rebuilding it.
