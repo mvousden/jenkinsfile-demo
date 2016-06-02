@@ -23,7 +23,9 @@ We can:
 We cannot (yet):
 
  - Integrate slack notifications.
- - Poll SCM at regular intervals.
+ - Poll SCM at regular intervals. The better option would be to set up a GitHub
+   webhook, but that requires making the Jenkins server public. Doing this
+   would be worth testing.
  - Ignore commits with the "[ci-skip]" string in their message.
  - Split builds into test and build jobs, as we do already with simulation
    packages.
