@@ -6,7 +6,7 @@ properties([[$class: 'jenkins.model.BuildDiscarderProperty',
                         numToKeepStr: '10',
                         artifactNumToKeepStr: '5']]])
 
-// Run all stages of the operation on one node, for simplicity to begin with.
+// Run tests and builds as separate jobs.
 node {
 
     // Checkout the source of this repository. The credentials and URL are
@@ -18,6 +18,12 @@ node {
     timeout(time: 5, unit: "MINUTES") {
         sh("py.test complicated_library_test.py")
     }
+}
+
+node {
+
+    stage "Checkout source"
+    checkout scm
 
     stage "Build binary"
     sh("make")
