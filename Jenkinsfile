@@ -16,4 +16,7 @@ node {
 
     stage "Build binary"
     sh("make")
+
+    stage "Archive binary."
+    step([$class: "ArtifactArchiver", artifacts: "compicated_binary.deb"])
 }
