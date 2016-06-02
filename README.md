@@ -18,11 +18,15 @@ We can:
    multibranch pipeline item.
  - Run a Python test suite using py.test via a shell command.
  - Make and archive an output file.
+ - Execute scripts at arbitrary points during the build.
 
 We cannot (yet):
 
  - Integrate slack notifications.
  - Poll SCM at regular intervals.
+ - Ignore commits with the "[ci-skip]" string in their message.
+ - Split builds into test and build jobs, as we do already with simulation
+   packages.
 
 Notes
 -----
