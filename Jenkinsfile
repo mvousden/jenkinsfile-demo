@@ -20,5 +20,5 @@ node {
     sh("make")
 
     stage "Archive binary."
-    archive includes: "compicated_binary.deb"
+    archive([includes: "complicated_binary.deb"])
 }
