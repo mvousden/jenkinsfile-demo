@@ -1,4 +1,4 @@
-# -*- mode: groovy -*-
+!-*- mode: groovy -*-
 
 stage "test"
 
