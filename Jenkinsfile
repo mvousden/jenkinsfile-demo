@@ -6,15 +6,14 @@ properties([[$class: 'jenkins.model.BuildDiscarderProperty',
                         numToKeepStr: '10',
                         artifactNumToKeepStr: '5']]])
 
+// Run all stages of the operation on one node, for simplicity to begin with.
 node {
     stage "Checkout source"
     checkout scm
 
-    /*
-    git([url: "https://github.com/mvousden/jenkinsfile-demo.git",
-         branch: "release"])
-    */
-
     stage "Test"
     sh("py.test complicated_library_test.py")
+
+    stage "Build binary"
+    sh("make")
 }
