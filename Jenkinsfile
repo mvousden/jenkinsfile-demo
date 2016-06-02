@@ -6,9 +6,9 @@ properties([[$class: 'jenkins.model.BuildDiscarderProperty',
                         numToKeepStr: '10',
                         artifactNumToKeepStr: '5']]])
 
-stage "test"
-
 node {
+    stage "test"
+
     git([url: "https://github.com/mvousden/jenkinsfile-demo.git",
          branch: "release"])
     sh("py.test complicated_library_test.py")
