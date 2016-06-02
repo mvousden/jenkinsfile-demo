@@ -19,6 +19,8 @@ We can:
  - Run a Python test suite using py.test via a shell command.
  - Make and archive an output file.
  - Execute scripts at arbitrary points during the build.
+ - Split builds into test and build jobs, as we do already with simulation
+   packages. If the tests fail, nodes further down the list are not executed.
 
 We cannot (yet):
 
@@ -27,8 +29,6 @@ We cannot (yet):
    webhook, but that requires making the Jenkins server public. Doing this
    would be worth testing.
  - Ignore commits with the "[ci-skip]" string in their message.
- - Split builds into test and build jobs, as we do already with simulation
-   packages.
 
 Notes
 -----
