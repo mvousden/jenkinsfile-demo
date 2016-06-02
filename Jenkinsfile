@@ -8,6 +8,9 @@ properties([[$class: 'jenkins.model.BuildDiscarderProperty',
 
 // Run all stages of the operation on one node, for simplicity to begin with.
 node {
+
+    // Checkout the source of this repository. The credentials and URL are
+    // stored in the configuration of the multibranch pipeline job.
     stage "Checkout source"
     checkout scm
 
@@ -21,4 +24,5 @@ node {
 
     stage "Archive binary."
     archive([includes: "complicated_binary.deb"])
+
 }
