@@ -1,7 +1,9 @@
-properties [[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '3']]]
+# -*- mode: groovy -*-
+
+stage "test"
 
 node {
     git([url: "https://github.com/mvousden/jenkinsfile-demo.git",
          branch: "release"])
-    sh "python complicated_library_test.py"
+    sh "py.test complicated_library_test.py"
 }
