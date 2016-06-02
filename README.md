@@ -8,3 +8,9 @@ development branches are representative of what might exist in a real project:
 
 The server_machine branch exists as a convenient way to start up a Jenkins
 server, and is not part of the testing schema.
+
+Notes
+-----
+
+Too many builds in quick succession result in "GitHub API rate limit exceeded",
+meaning Jenkins can't make requests to GitHub for a while.
