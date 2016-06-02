@@ -9,6 +9,21 @@ development branches are representative of what might exist in a real project:
 The server_machine branch exists as a convenient way to start up a Jenkins
 server, and is not part of the testing schema.
 
+Behaviours
+----------
+
+We can:
+
+ - Check out public Github source, and create builds for each branch using a
+   multibranch pipeline item.
+ - Run a Python test suite using py.test via a shell command.
+ - Make and archive an output file.
+
+We cannot (yet):
+
+ - Integrate slack notifications.
+ - Poll SCM at regular intervals.
+
 Notes
 -----
 
