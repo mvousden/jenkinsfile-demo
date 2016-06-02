@@ -12,7 +12,9 @@ node {
     checkout scm
 
     stage "Test"
-    sh("py.test complicated_library_test.py")
+    timeout(time: 5, unit: "MINUTES") {
+        sh("py.test complicated_library_test.py")
+    }
 
     stage "Build binary"
     sh("make")
