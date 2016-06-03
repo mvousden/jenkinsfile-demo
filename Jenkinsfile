@@ -51,9 +51,17 @@ try {
             archive([includes: "complicated_binary_third.deb"])
         }
     }, failFast: false
+
+    // If we got here, it means the build was a success.
+    currentBuild.result = "SUCCESS"
 }
 
 // Postbuild stuff
+catch (caughtError) {
+    currentBuild.result = "FAILURE"
+    caughtError = caughtError
+}
+
 finally {
 
     // Add Slack notification. We don't run this on a separate executor since
@@ -61,6 +69,23 @@ finally {
     // private).
 
     // String token = new File("/var/lib/jenkins/slack-token").text
-    slackSend channel: '#general', color: 'good', message: 'Build Successful',
-              teamDomain: 'jenkinsfile-demo', token: 'CRLkwfq2SLiqAn0q9PPtaRdP'
+    String slackChannel = "#general"
+    String slackDomain = "jenkinsfile-demo"
+    String slackToken = "CRLkwfq2SLiqAn0q9PPtaRdP"
+
+
+    if (currentBuild.result == "SUCCESS") {
+        slackSend channel: slackChannel, teamDomain: slackDomain,
+        token: slackToken, color: 'good',
+        message: 'Build Successful on branch ' + env.BRANCH_NAME
+    } else {
+        slackSend channel: slackChannel, teamDomain: slackDomain,
+        token: slackToken, color: 'bad',
+        message: 'Build Failed on branch ' + env.BRANCH_NAME
+    }
+
+    // Re-throw error if one was thrown in the try block.
+    if (caughtError) {
+        throw caughtError
+    }
 }
