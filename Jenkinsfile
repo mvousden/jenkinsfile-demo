@@ -20,15 +20,44 @@ node {
     }
 }
 
-node {
+// Execute multiple builds in parallel.
+parallel
+makeFirstTarget: {
+    node {
+        stage "Checkout source"
+        checkout scm
 
-    stage "Checkout source"
-    checkout scm
+        stage "Build first binary"
+        sh("make first")
 
-    stage "Build binary"
-    sh("make")
+        stage "Archive binary."
+        archive([includes: "complicated_binary_first.deb"])
+    }
+},
 
-    stage "Archive binary."
-    archive([includes: "complicated_binary.deb"])
+makeSecondTarget: {
+    node {
+        stage "Checkout source"
+        checkout scm
 
-}
+        stage "Build second binary"
+        sh("make second")
+
+        stage "Archive binary."
+        archive([includes: "complicated_binary_second.deb"])
+    }
+},
+
+makeThirdTarget: {
+    node {
+        stage "Checkout source"
+        checkout scm
+
+        stage "Build third binary"
+        sh("make third")
+
+        stage "Archive binary."
+        archive([includes: "complicated_binary_third.deb"])
+    }
+},
+failFast: false
