@@ -22,7 +22,7 @@ node {
 
 // Execute multiple builds in parallel. Each of these targets runs on a
 // different executor. Built objects will be archived successfully, even if
-// other parallel targets fail.
+// other parallel targets fail (because failFast is False).
 //
 // Unfortunately, these objects will not be available as "last successful"
 // artefacts. It is also not possible to build certain targets individually,
