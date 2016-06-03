@@ -21,8 +21,7 @@ node {
 }
 
 // Execute multiple builds in parallel.
-parallel
-makeFirstTarget: {
+parallel makeFirstTarget: {
     node {
         stage "Checkout source"
         checkout scm
