@@ -21,6 +21,9 @@ We can:
  - Execute scripts at arbitrary points during the build.
  - Split builds into test and build jobs, as we do already with simulation
    packages. If the tests fail, nodes further down the list are not executed.
+ - Run build jobs in parallel. If one of the builds fails, artefacts from nodes
+   that executed successfully are still uploaded if failFast is false (but the
+   job as a whole is marked as failed).
 
 We cannot (yet):
 
