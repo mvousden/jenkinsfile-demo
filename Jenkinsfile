@@ -33,8 +33,7 @@ makeFirstTarget: {
         stage "Archive binary."
         archive([includes: "complicated_binary_first.deb"])
     }
-},
-makeSecondTarget: {
+}, makeSecondTarget: {
     node {
         stage "Checkout source"
         checkout scm
@@ -45,8 +44,7 @@ makeSecondTarget: {
         stage "Archive binary."
         archive([includes: "complicated_binary_second.deb"])
     }
-},
-makeThirdTarget: {
+}, makeThirdTarget: {
     node {
         stage "Checkout source"
         checkout scm
@@ -57,5 +55,4 @@ makeThirdTarget: {
         stage "Archive binary."
         archive([includes: "complicated_binary_third.deb"])
     }
-},
-failFast: false
+}, failFast: false
