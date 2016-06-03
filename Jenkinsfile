@@ -54,4 +54,4 @@ parallel makeFirstTarget: {
 String token = new File("/var/lib/jenkins/slack-token").text
 
 slackSend channel: '#general', color: 'good', message: 'Build Successful',
-          teamDomain: 'jenkinsfile-demo', token: token
+          teamDomain: 'jenkinsfile-demo', token: 'CRLkwfq2SLiqAn0q9PPtaRdP'
