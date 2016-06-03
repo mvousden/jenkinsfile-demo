@@ -51,7 +51,7 @@ parallel makeFirstTarget: {
 
 // Add Slack notification. We don't run this on a separate executor since it's
 // a small job. The token is stored on the Jenkins server (in private).
-String token = new File("/var/lib/jenkins/slack-token").text
+// String token = new File("/var/lib/jenkins/slack-token").text
 
 slackSend channel: '#general', color: 'good', message: 'Build Successful',
           teamDomain: 'jenkinsfile-demo', token: 'CRLkwfq2SLiqAn0q9PPtaRdP'
