@@ -8,6 +8,7 @@ properties([[$class: 'jenkins.model.BuildDiscarderProperty',
 
 // Build starts here. We put this in a try/except/finally block so that we can
 // perform post-build actions (such as Slack notifications).
+caughtError = 0
 try {
 
     // Run tests and builds on separate nodes (potentially).
@@ -85,7 +86,7 @@ finally {
     }
 
     // Re-throw error if one was thrown in the try block.
-    if (caughtError) {
+    if (caughtError != 0) {
         throw caughtError
     }
 }
