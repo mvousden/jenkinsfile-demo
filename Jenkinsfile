@@ -20,7 +20,14 @@ node {
     }
 }
 
-// Execute multiple builds in parallel.
+// Execute multiple builds in parallel. Each of these targets runs on a
+// different executor. Built objects will be archived successfully, even if
+// other parallel targets fail.
+//
+// Unfortunately, these objects will not be available as "last successful"
+// artefacts. It is also not possible to build certain targets individually,
+// meaning a failed job will need to be re-run in its entirety to build one
+// artefact that previously failed.
 stage "Build and archive binaries"
 parallel makeFirstTarget: {
     node {
