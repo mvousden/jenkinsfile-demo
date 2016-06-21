@@ -65,6 +65,7 @@ catch (caughtError) {
 
 finally {
 
+    // Run this finally block in a node to define readFile.
     node {
         // Add Slack notification. We don't run this on a separate executor
         // since it's a small job. The token is stored on the Jenkins server
