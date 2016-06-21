@@ -68,12 +68,9 @@ finally {
     // Add Slack notification. We don't run this on a separate executor since
     // it's a small job. The token is stored on the Jenkins server (in
     // private).
-
-    // String token = new File("/var/lib/jenkins/slack-token").text
     String slackChannel = "#general"
     String slackDomain = "jenkinsfile-demo"
-    String slackToken = "CRLkwfq2SLiqAn0q9PPtaRdP"
-
+    String slackToken = new File("/var/lib/jenkins/slack-token").text
 
     if (currentBuild.result == "SUCCESS") {
         slackSend channel: slackChannel, teamDomain: slackDomain,
