@@ -65,25 +65,27 @@ catch (caughtError) {
 
 finally {
 
-    // Add Slack notification. We don't run this on a separate executor since
-    // it's a small job. The token is stored on the Jenkins server (in
-    // private).
-    String slackChannel = "#general"
-    String slackDomain = "jenkinsfile-demo"
-    String slackToken = readFile("/var/lib/jenkins/slack-token")
+    node {
+        // Add Slack notification. We don't run this on a separate executor
+        // since it's a small job. The token is stored on the Jenkins server
+        // (in private).
+        String slackChannel = "#general"
+        String slackDomain = "jenkinsfile-demo"
+        String slackToken = readFile("/var/lib/jenkins/slack-token")
 
-    if (currentBuild.result == "SUCCESS") {
-        slackSend channel: slackChannel, teamDomain: slackDomain,
-        token: slackToken, color: 'good',
-        message: 'Build Successful on branch ' + env.BRANCH_NAME
-    } else {
-        slackSend channel: slackChannel, teamDomain: slackDomain,
-        token: slackToken, color: 'bad',
-        message: 'Build Failed on branch ' + env.BRANCH_NAME
-    }
+        if (currentBuild.result == "SUCCESS") {
+            slackSend channel: slackChannel, teamDomain: slackDomain,
+                token: slackToken, color: 'good',
+                message: 'Build Successful on branch ' + env.BRANCH_NAME
+        } else {
+            slackSend channel: slackChannel, teamDomain: slackDomain,
+                token: slackToken, color: 'bad',
+                message: 'Build Failed on branch ' + env.BRANCH_NAME
+        }
 
-    // Re-throw error if one was thrown in the try block.
-    if (caughtError != 0) {
-        throw caughtError
+        // Re-throw error if one was thrown in the try block.
+        if (caughtError != 0) {
+            throw caughtError
+        }
     }
 }
