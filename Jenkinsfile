@@ -37,19 +37,19 @@ try {
         node {
             checkout scm
             sh("make first")
-            archive([includes: "complicated_binary_first.deb"])
+            archive([includes: "artefacts/complicated_binary_first.deb"])
         }
     }, makeSecondTarget: {
         node {
             checkout scm
             sh("make second")
-            archive([includes: "complicated_binary_second.deb"])
+            archive([includes: "artefacts/complicated_binary_second.deb"])
         }
     }, makeThirdTarget: {
         node {
             checkout scm
             sh("make third")
-            archive([includes: "complicated_binary_third.deb"])
+            archive([includes: "artefacts/complicated_binary_third.deb"])
         }
     }, failFast: false
 

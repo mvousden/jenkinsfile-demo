@@ -1,10 +1,13 @@
-first:
-	@touch complicated_binary_first.deb
+first: artefactpath
+	@touch artefacts/complicated_binary_first.deb
 
-second:
-	@touch complicated_binary_second.deb
+second: artefactpath
+	@touch artefacts/complicated_binary_second.deb
 
-third:
-	@touch complicated_binary_third.deb
+third: artefactpath
+	@touch artefacts/complicated_binary_third.deb
 
-.PHONY: first second third
+artefactpath:
+	@mkdir --parents artefacts
+
+.PHONY: first second third artefactpath
