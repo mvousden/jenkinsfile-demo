@@ -70,7 +70,7 @@ finally {
     // private).
     String slackChannel = "#general"
     String slackDomain = "jenkinsfile-demo"
-    String slackToken = new File("/var/lib/jenkins/slack-token").text
+    String slackToken = readFile("/var/lib/jenkins/slack-token")
 
     if (currentBuild.result == "SUCCESS") {
         slackSend channel: slackChannel, teamDomain: slackDomain,
