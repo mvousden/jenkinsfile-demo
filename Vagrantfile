@@ -72,5 +72,9 @@ Vagrant.configure(2) do |config|
     sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
     sudo apt-get update
     sudo apt-get install jenkins -y
+
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    sudo npm install azure-cli -g
   SHELL
 end
