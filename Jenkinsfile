@@ -92,7 +92,7 @@ finally {
                 sh('TAG=$(git name-rev --tags --name-only HEAD | cut -f1 -d.); if [ "$(echo $TAG | tr -d [:space:])" == "undefined" ]; then git rev-parse --short HEAD > save_id; else echo $TAG > save_id; fi')
 
                 // Create container for this build.
-                sh("azure storage container create $(cat save_id)")
+                sh("azure storage container create \$(cat save_id)")
 
                 // Save artefact as a blob in that container.
                 sh("for FL in \$(ls artefacts); do azure storage blob upload artefacts/$FL $SAVE_ID \$(echo $FL | cut -d. -f1)_\$(cat save_id).deb")
