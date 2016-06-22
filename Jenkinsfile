@@ -86,7 +86,7 @@ finally {
 
         // If we're on the release branch, push binaries to Azure.
         if (currentBuild.result == "SUCCESS") {
-            if (${env.BRANCH_NAME} == "release") {
+            if (env.BRANCH_NAME == "release") {
                 String azureToken = readFile("/var/lib/jenkins/azure-token")
                 env.AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=jenkinsfiledemo;AccountKey=" + azureToken + ";"
                 sh('TAG=$(git name-rev --tags --name-only HEAD | cut -f1 -d^)' +
