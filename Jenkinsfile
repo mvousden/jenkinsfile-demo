@@ -84,6 +84,28 @@ finally {
                 message: 'Build Failed on branch ' + env.BRANCH_NAME
         }
 
+        // If we're on the release branch, push binaries to Azure.
+        if (currentBuild.result == "SUCCESS") {
+            if (${env.BRANCH_NAME} == "release") {
+                String azureToken = readFile("/var/lib/jenkins/azure-token")
+                env.AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=jenkinsfiledemo;AccountKey=" + azureToken + ";"
+                sh('TAG=$(git name-rev --tags --name-only HEAD | cut -f1 -d^)
+                    if [ "$(echo $TAG | tr -d [:space:])" == "undefined" ]; then
+                        git rev-parse --short HEAD > save_id
+                    else
+                        echo $TAG > save_id
+                    fi')
+                env.SAVE_ID = readFile("save_id").trim()
+
+                // Create container for this build.
+                sh("azure storage container create $SAVE_ID")
+
+                // Save artefact as a blob in that container.
+                sh("for FL in $(ls artefacts); do azure storage blob upload artefacts/$FL $SAVE_ID $(echo $FL | cut -d. -f1)_$SAVE_ID.deb")
+            }
+        }
+
+
         // Re-throw error if one was thrown in the try block.
         if (caughtError != 0) {
             throw caughtError
