@@ -95,7 +95,7 @@ finally {
                 sh("azure storage container create \$(cat save_id)")
 
                 // Save artefact as a blob in that container.
-                sh("for FL in \$(ls artefacts); do azure storage blob upload artefacts/$FL $SAVE_ID \$(echo $FL | cut -d. -f1)_\$(cat save_id).deb")
+                sh("for FL in \$(ls artefacts); do azure storage blob upload artefacts/\$FL \$(cat save_id) \$(echo \$FL | cut -d. -f1)_\$(cat save_id).deb")
             }
         }
 
