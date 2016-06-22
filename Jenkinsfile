@@ -89,12 +89,12 @@ finally {
             if (${env.BRANCH_NAME} == "release") {
                 String azureToken = readFile("/var/lib/jenkins/azure-token")
                 env.AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=jenkinsfiledemo;AccountKey=" + azureToken + ";"
-                sh('TAG=$(git name-rev --tags --name-only HEAD | cut -f1 -d^)
-                    if [ "$(echo $TAG | tr -d [:space:])" == "undefined" ]; then
-                        git rev-parse --short HEAD > save_id
-                    else
-                        echo $TAG > save_id
-                    fi')
+                sh('TAG=$(git name-rev --tags --name-only HEAD | cut -f1 -d^)' +
+                   'if [ "$(echo $TAG | tr -d [:space:])" == "undefined" ]; then' +
+                   '    git rev-parse --short HEAD > save_id' +
+                   'else' +
+                   '    echo $TAG > save_id' +
+                   'fi')
                 env.SAVE_ID = readFile("save_id").trim()
 
                 // Create container for this build.
